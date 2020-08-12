@@ -35,6 +35,10 @@ body {
     opacity: 0.9;
 }
 
+/* .div > a:hover{
+    font-size: 1.05em;
+} */
+
 .icon {
     position: relative;
     display: block;
