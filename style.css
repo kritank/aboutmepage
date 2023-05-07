@@ -431,13 +431,13 @@ body {
     }
 }
 
-ol {
+ol.experiences-ol {
 	list-style: none;
 	counter-reset: list;
 	padding: 0 1rem;
 }
 
-li {
+li.experiences-ol {
 	position: relative;
 	counter-increment: list;
 	max-width: 45rem;
@@ -449,7 +449,7 @@ li {
 	background-color: white;
 }
 
-li::before {
+li.experiences-ol::before {
 	--stop: calc(100% / var(--length) * var(--i));
 	--l: 62%;
 	--l2: 88%;
@@ -466,14 +466,14 @@ li::before {
 	background: linear-gradient(to right, var(--c1) var(--stop), var(--c2) var(--stop));
 }
 
-h3 {
+h3.experiences-ol {
 	display: flex;
 	align-items: baseline;
 	margin: 0 0 1rem;
 	color: var(--brandColor);
 }
 
-h3::before {
+h3.experiences-ol::before {
 	display: flex;
 	justify-content: center;
 	align-items: center;
