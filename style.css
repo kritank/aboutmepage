@@ -431,7 +431,7 @@ body {
     }
 }
 
-ol.experiences-ol {
+/* ol.experiences-ol {
 	list-style: none;
 	counter-reset: list;
 	padding: 0 1rem;
@@ -503,3 +503,4 @@ h3.experiences-ol::before {
 		margin-right: 1.5rem;
 	}
 }
+ */
