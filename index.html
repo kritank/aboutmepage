@@ -1,248 +1,285 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Kritank Singh | MNNIT | CSE | Data Science Analyst </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kritank Singh — Lead Data Engineer</title>
+<meta name="description" content="Lead Data Engineer at Citi. Apache Spark performance engineering and terabyte-scale pipelines on Hadoop, Hive and HDFS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E4E6DF;
+    --paper-2:#DADDD2;
+    --ink:#14181A;
+    --ink-soft:#4A524E;
+    --moss:#3E5F52;
+    --hot:#B23A2B;
+    --rule:rgba(20,24,26,.16);
+    --display:"IBM Plex Sans Condensed",system-ui,sans-serif;
+    --body:"IBM Plex Serif",Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --wrap:min(1080px,92vw);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.62;
+  }
+  a{color:inherit}
+  .wrap{width:var(--wrap);margin-inline:auto}
+
+  /* ---- top bar ---- */
+  .topbar{
+    border-bottom:1px solid var(--rule);
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;
+  }
+  .topbar .wrap{display:flex;justify-content:space-between;gap:1rem;padding:.9rem 0;flex-wrap:wrap}
+  .topbar a{text-decoration:none;color:var(--ink-soft)}
+  .topbar a:hover{color:var(--hot)}
+  .topbar nav{display:flex;gap:1.4rem}
+
+  /* ---- hero ---- */
+  .hero{padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,3.5rem)}
+  .eyebrow{
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--moss);margin:0 0 1.1rem;
+  }
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(2.9rem,8.5vw,5.6rem);line-height:.94;letter-spacing:-.015em;
+    margin:0 0 1.3rem;text-transform:uppercase;
+  }
+  .lede{font-size:clamp(1.08rem,2.1vw,1.3rem);max-width:56ch;margin:0 0 2rem}
+  .lede em{font-style:italic;color:var(--moss)}
+
+  /* ---- signature: partition runtime chart ---- */
+  .skew{
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    padding:1.9rem 0 1.6rem;margin-top:2.6rem;
+  }
+  .skew-head{
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+    font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:1.4rem;
+  }
+  .skew-head b{color:var(--ink);font-weight:500}
+  .bars{display:flex;align-items:flex-end;gap:clamp(3px,.8vw,9px);height:132px}
+  .bar{
+    flex:1;background:var(--moss);border-radius:1px 1px 0 0;
+    height:var(--lo);
+    transition:height 1.15s cubic-bezier(.6,.02,.2,1);
+  }
+  .bar.is-hot{background:var(--hot)}
+  body.pre .bar{height:var(--hi)}
+  .axis{
+    display:flex;justify-content:space-between;
+    font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);
+    margin-top:.7rem;padding-top:.6rem;border-top:1px solid var(--rule);
+  }
+  .legend{display:flex;gap:1.4rem;font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);margin-top:.9rem;flex-wrap:wrap}
+  .legend i{display:inline-block;width:9px;height:9px;background:var(--moss);margin-right:.45rem;font-style:normal}
+  .legend .h i{background:var(--hot)}
+
+  /* ---- sections ---- */
+  section{padding:clamp(3rem,7vw,5rem) 0;border-top:1px solid var(--rule)}
+  h2{
+    font-family:var(--mono);font-weight:500;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--moss);margin:0 0 2.2rem;
+  }
+  .grid{display:grid;grid-template-columns:1fr 2.1fr;gap:clamp(1rem,4vw,3.5rem)}
+  @media(max-width:760px){.grid{grid-template-columns:1fr;gap:.6rem}}
+
+  .role{display:grid;grid-template-columns:1fr 2.1fr;gap:clamp(1rem,4vw,3.5rem);padding:1.9rem 0;border-top:1px solid var(--rule)}
+  .role:first-of-type{border-top:0;padding-top:0}
+  @media(max-width:760px){.role{grid-template-columns:1fr;gap:.5rem}}
+  .role-meta{font-family:var(--mono);font-size:.76rem;color:var(--ink-soft);line-height:1.75}
+  .role-meta b{display:block;font-family:var(--display);font-size:1.22rem;font-weight:600;color:var(--ink);letter-spacing:.01em;margin-bottom:.3rem;text-transform:none}
+  .role ul{margin:0;padding-left:1.05rem}
+  .role li{margin-bottom:.62rem}
+  .role li::marker{color:var(--moss)}
+  .role li:last-child{margin-bottom:0}
+  strong{font-weight:600}
+
+  .proj{padding:1.9rem 0;border-top:1px solid var(--rule)}
+  .proj:first-of-type{border-top:0;padding-top:0}
+  .proj h3{font-family:var(--display);font-weight:600;font-size:1.35rem;margin:0 0 .2rem;letter-spacing:.005em}
+  .proj .tech{font-family:var(--mono);font-size:.72rem;color:var(--moss);letter-spacing:.05em;margin:0 0 .9rem}
+  .proj p{margin:0;max-width:70ch}
+
+  .stack dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.85rem 1.8rem}
+  @media(max-width:620px){.stack dl{grid-template-columns:1fr;gap:.15rem 0}}
+  .stack dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--moss);padding-top:.34rem}
+  .stack dd{margin:0}
+  @media(max-width:620px){.stack dd{margin-bottom:1rem}}
+
+  /* ---- contact ---- */
+  .contact a{
+    font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,3vw,1.75rem);
+    text-decoration:none;display:block;padding:.85rem 0;border-top:1px solid var(--rule);
+    transition:color .18s,padding-left .18s;
+  }
+  .contact a:last-of-type{border-bottom:1px solid var(--rule)}
+  .contact a:hover,.contact a:focus-visible{color:var(--hot);padding-left:.7rem}
+  .contact span{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);letter-spacing:.09em;text-transform:uppercase;margin-right:1.1rem}
+
+  footer{padding:2.4rem 0 3.2rem;border-top:1px solid var(--rule);font-family:var(--mono);font-size:.72rem;color:var(--ink-soft)}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--hot);outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    body.pre .bar{height:var(--lo)}
+  }
+</style>
 </head>
+<body class="pre">
 
-<body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" id="nav">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-        <a class="navbar-brand" href="#"><h3>Kritank</h3></a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#about-me">About me</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#academics">Academics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#skills">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#projects">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact-us">Contact</a>
-                </li>
-        </div>
+<div class="topbar">
+  <div class="wrap">
+    <a href="#top">Kritank Singh</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div>
-         <!-- data-spy="scroll" data-target="#nav" data-offset="0"  -->
-        <!-- Hero Image -->
-        <div id="main-image">
-            <div class="hero-text text-white text-center">
-                <div class="container"><img src="avatar.png" alt="User" style="max-height:80% ;max-width: 80%;min-width: 300px;min-height: 300px;"></div>
-                <h2 style="font-size: 2rem; color:ivory">Kritank Singh</h2>
-                <p>Data Science Analyst | Spark | SQL</p>
-                <a href="#about-me" class="btn btn-outline-secondary">Know More!</a>
-            </div>
-        </div>
-        <!-- jumbotron -->
-        <div class="jumbotron jumbotron-fluid" id="about-me">
-            <div class="container">
-                <h1>About Me</h1>
-                <p>
-                    My name is Kritank Singh and I am currenty working in Citi. In my position as a data engineer at Citi, I am passionate about using technology to address complex problems and advance society. My expertise in computer science and engineering from NIT Allahabad equips me to offer original ideas that support business success. I also bring a unique perspective to my job.
-                    <br>
-                    I have developed my abilities in data management, processing, and analysis during the course of my profession. C, C++, Java, Python, Scala, SQL, DSA, and other programming languages and tools are just a few of the ones I am proficient in. Additionally, I've developed my skills in data modelling and ETL procedures.
-                    <br>
-                    My objective is to keep pushing the limits of what is possible with data, and I'm thrilled to work in a field that is always changing. I am always eager to learn new things and tackle new tasks, whether it be building scalable data pipelines, developing predictive models, or developing novel strategies to extract insights from enormous amounts of data.
-                    <br>
-                    If you want to learn more about my education and professional background or if you have a fascinating data-related project that you'd want to work on together, please feel free to connect with me on LinkedIn.
-                </p>
-                <button class="btn btn-outline-secondary"><a href="resume.pdf">Download Resume</a></button>
-            </div>
-        </div>
+  </div>
+</div>
 
-<!--         <div class="container-fluid" id="experiences">
-            <h2 class="text-center">Experiences</h2>
-            <div class="conatainer p-4" style="max-width: 80%; margin:auto">
-                <ol style="--length: 5" role="list" class="experiences-ol">
-                <li style="--i: 1"  id="experiences-li">
-                    <h3>Data Engineer at Citicorp</h3>
-                        <b>Scoring Migration II</b>
-                        <p>
-                            • Creating coherent data pipelines to generate and transmit risk scores generated by different models to various required downstream applications.
-                        </p>
-                        <b>Concept 470 : Extract Creation & Migration</b>
-                        <p>
-                            • Migration Project which required redesigning an efficient solutions to mimic,
-                            identify and fix gaps in existing ETL logic for /textbfmultitude(500+) of extracts currently going to variety of downstream end-users.
-                        </p>
-                </li>
-                <li style="--i: 2"   class="experiences-li">
-                    <h3>Technical Analyst at Citicorp</h3>
-                        <p>
-                           <b>Scoring Migration I</b>
-                            • Data extracts of several risk models were created using the present data
-                            pipelines for various downstream end users. Total automation was achieved
-                            through effective job scheduling in AutoSys.
-                            <b>Audit Framework Integration</b>
-                            • In order to create a single centralised audit data source for more than 1000
-                            server-based jobs, the existing ETL processes and the centralised audit framework were successfully integrated 
-                        </p>
-                    </li>
-                </ol>
-            </div>
-        </div>
-         -->
-        <!-- timeline -->
-        <div class="container-fluid" id="academics">
-            <h2 class="text-center">Academics</h2>
-            <div class="conatainer p-4" style="max-width: 80%; margin:auto">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="main-timeline4">
-                            <div class="timeline">
-                                <a href="#" class="timeline-content">
-                                    <span class="year"><i class="fa-2x fa fa-graduation-cap"></i></span>
-                                    <div class="inner-content">
-                                        <h3 class="title">Motilal Nehru National Institue of Technology, Allahabad</h3>
-                                        <p class="description">
-                                            <p style="line-height:0.5rem;">CSE</p>
-                                            <p style="line-height:0.5rem;">2017 - 2021</p>
-                                            <p style="line-height:0.5rem;">CPI: 8.80/10</p>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="timeline">
-                                <a href="#" class="timeline-content">
-                                    <span class="year"><i class="fa-2x fa fa-lightbulb-o"></i></span>
-                                    <div class="inner-content">
-                                        <h3 class="title">Jagran Public School,Lucknow</h3>
-                                        <p class="description">
-                                            <p style="line-height:0.5rem;">Class XII</p>
-                                            <p style="line-height:0.5rem;">2015 - 2016</p>
-                                            <p style="line-height:0.5rem;">Percentage: 93.20/100</p>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="timeline">
-                                <a href="#" class="timeline-content">
-                                    <span class="year"><i class="fa-2x fa fa-flash"></i></span>
-                                    <div class="inner-content">
-                                        <h3 class="title">Jagran Public School,Lucknow</h3>
-                                        <p class="description">
-                                            <p style="line-height:0.5rem;">Class X</p>
-                                            <p style="line-height:0.5rem;">2013 - 2014</p>
-                                            <p style="line-height:0.5rem;">CGPA: 10/10</p>
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<header class="hero wrap" id="top">
+  <p class="eyebrow">Pune, India — Lead Data Engineer at Citi</p>
+  <h1>Kritank<br>Singh</h1>
+  <p class="lede">
+    I make large data move fast. Five years of Apache Spark in production, at the scale where
+    <em>partition strategy, skew, and execution plans stop being theory</em> and start being the
+    difference between a job that finishes and a job that finishes on time.
+  </p>
 
-
-        <!-- project timeline -->
-        <div class="container-fluid" id="projects">
-            <h2 class="text-center">College Projects</h2>
-            <div class="ed-time">
-             
-
-                <div class="p">
-                    <span class="ed-til-con-title">Splitwise</span>
-                    <p>
-                        A java based desktop application. It is application that stores bills and splits the amount amoung friends. It is made using MySql database and Java Fx for frontend.
-                    </p>
-                    <a class="icon" href="https://github.com/kritank/splitwise"><i class="fa-3x fa fa-github"></i></a>
-                </div>
-
-                <div class="p">
-                    <span class="ed-til-con-title">About WebPage</span>
-                    <p>
-                        A webpage conating details about myself. It is made using HTML, CSS ans JavaScript.
-                    </p>
-                    <!-- <div class="div p-2"> -->
-                        <a class="icon" href="https://github.com/kritank/aboutmepage"><i class="fa-3x fa fa-github"></i></a>
-                        <!-- <a class="m-2" href="#"><i class="fa-2x fa fa-external-link"></i></a> -->
-                    <!-- </div> -->
-                </div>
-
-                <div class="p">
-                    <span class="ed-til-con-title">Sacred Bazzar</span>
-                    <p>
-                        A java based desktop application. It is marketplace where one can place his orders. It is made using MySql database and Java Fx for frontend.
-                    </p>
-                </div>
-            </div>
-        </div>
-        
-            <!-- skill -->
-        <div class="container-fluid" id="skills">
-            <h2 class="text-center">Skills</h2>
-            <div class="conatainer p-4" style="max-width: 80%; margin:auto">
-                <h4>HTML</h4>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
-                </div>
-                <h4>CSS</h4>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">60%</div>
-                </div>
-                <h4>Spark</h4>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">50%</div>
-                </div>
-<!--                 <h4>Node</h4>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">40%</div>
-                </div> -->
-            </div>
-        </div>
-
-    
-    
-        <!-- Footer -->
-        <footer class="page-footer font-small blue-grey lighten-5 text-white" id="contact-us">
-            <div style="background-color: #21d192;">
-                <div class="container">
-                    <div class="row py-4 d-flex align-items-center">
-                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                            <h6 class="mb-0">Lets get connected on social networks!</h6>
-                        </div>
-                        <div class="col-md-6 col-lg-7 text-center text-md-right">
-                            <a class="text-white p-2" href="http://www.linkedin.com/in/kritank"><i class="fa-2x fa fa-linkedin"> </i></a>
-                            <a class="text-white p-2" href="https://www.facebook.com/singh.kritank7/"><i class="fa-2x fa fa-facebook-f"> </i></a>
-                            <a class="text-white p-2" href="mailto:singh.kritank7@gmail.com" target="_top"><i class="fa-2x fa fa-envelope"></i></a>
-   
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright text-center text-black-50 py-2">
-                <p>
-                    © Kritank 2020 | <i class="fa fa-code icon" style="color:black; font-size:1.1em; font-weight: 550;"></i>  with <i class="fa fa-heart icon"  style="color:black; font-size:1.1em; font-weight: 550;"></i>  by Kritank Singh
-                </p>
-                <p>
-                    Still Under Developement 
-                </p>
-                <!-- © Kritank 2020 | <i class="fa fa-code icon"></i>  with <i class="fa fa-heart icon"></i>  by Kritank Singh -->
-            </div>
-        </footer>
-
+  <div class="skew">
+    <div class="skew-head">
+      <span>Partition runtime distribution — risk extract pipeline</span>
+      <span><b>8h 20m &rarr; 1h 48m</b> after redesign</span>
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
+    <div class="bars" id="bars" aria-hidden="true"></div>
+    <div class="axis"><span>partition 0</span><span>partition 47</span></div>
+    <p class="legend">
+      <span><i></i>Balanced partitions, after tuning</span>
+      <span class="h"><i></i>Skewed partition holding the whole job</span>
+    </p>
+    <p class="sr-only" style="position:absolute;left:-9999px">
+      Chart: before tuning, one skewed partition ran far longer than the rest and held up the job.
+      After re-partitioning on join keys, runtimes are evenly distributed.
+    </p>
+  </div>
+</header>
 
+<section id="work" class="wrap">
+  <h2>Work</h2>
+
+  <div class="role">
+    <p class="role-meta"><b>Lead Data Engineer</b>Citi · Apr 2025 — Present</p>
+    <ul>
+      <li>Own the risk-score pipeline chain serving downstream risk models — <strong>multi-terabyte</strong> Hive and Parquet datasets on HDFS, joined through sequences tuned with broadcast thresholds, adaptive query execution, and salted partitioning.</li>
+      <li>Led an ETL redesign across <strong>500+ production extracts</strong>, consolidating redundant scans and rewriting execution plans. Roughly <strong>$1M saved annually</strong>.</li>
+      <li>Cut extract generation and transmission from <strong>over 8 hours to under 2</strong> by re-partitioning on join keys, removing wide shuffle transformations, and right-sizing executor memory and shuffle partitions.</li>
+      <li>Ran the Cloudera CDH to CDP platform migration across all 500+ extracts with <strong>zero downtime</strong>, validating output parity in parallel before cutover.</li>
+      <li>Driving the team's Spark Scala to PySpark migration on Spark 3, and writing the standardization framework behind it.</li>
+    </ul>
+  </div>
+
+  <div class="role">
+    <p class="role-meta"><b>Senior Data Engineer</b>Citi · Jul 2022 — Mar 2025</p>
+    <ul>
+      <li>Built a Spark extract validation framework doing order-independent schema and row-level reconciliation, catching defects before production.</li>
+      <li>Resolved data skew and optimized reads of <strong>80GB+ Parquet part files</strong> on HDFS.</li>
+      <li>Built secure data exchange pipelines with external partners over Connect Direct, with retry, checksum verification, and audit logging.</li>
+      <li>Designed a reusable delta framework for column-level change detection, replacing per-pipeline bespoke logic across teams.</li>
+    </ul>
+  </div>
+
+  <div class="role">
+    <p class="role-meta"><b>Data Engineer</b>Citi · Jul 2021 — Jul 2022</p>
+    <ul>
+      <li>Integrated ETL processes with a centralized audit framework across <strong>1000+ scheduled jobs</strong>, replacing scattered manual tracking with one source of truth for job lineage.</li>
+      <li>Improved Spark job performance through partitioning, broadcast joins, and execution plan analysis on critical-path work.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <h2>Projects</h2>
+
+  <div class="proj">
+    <h3>Creator Analytics Platform</h3>
+    <p class="tech">Python · PySpark · AWS · Instagram Graph API · YouTube Data API v3</p>
+    <p>Benchmarks mid-tier creators against the leaders in their category. Nightly batch ingestion through the Instagram Business Discovery endpoint, with field batching, caching, and token lifecycle management to stay inside API rate limits. A PySpark gap-scoring engine computes per-creator performance deltas against tier-and-category benchmarks and ranks the recommendations.</p>
+  </div>
+
+  <div class="proj">
+    <h3>Dynamic YARN Queue Selection</h3>
+    <p class="tech">Bash · YARN · Apache Spark · Hadoop</p>
+    <p>A job-submission wrapper that inspects live queue capacity and routes Spark jobs to the least-contended queue at submit time, cutting scheduling wait on a shared on-premises cluster.</p>
+  </div>
+</section>
+
+<section id="stack" class="wrap stack">
+  <h2>Stack</h2>
+  <dl>
+    <dt>Processing</dt>
+    <dd>Apache Spark (Scala and PySpark, Spark 3), Spark SQL, Structured Streaming, Hive, HiveQL, YARN</dd>
+    <dt>Languages</dt>
+    <dd>Python, Scala, SQL, Shell, Java, C++</dd>
+    <dt>Storage</dt>
+    <dd>HDFS, Parquet, ORC, Avro, Delta Lake, AWS S3</dd>
+    <dt>Platform</dt>
+    <dd>Cloudera CDH and CDP, Databricks, AWS, Airflow, Autosys, Connect Direct, Jenkins, Git</dd>
+    <dt>Education</dt>
+    <dd>B.Tech Computer Science, MNNIT Allahabad — CGPA 8.8/10</dd>
+  </dl>
+</section>
+
+<section id="contact" class="wrap contact">
+  <h2>Contact</h2>
+  <a href="mailto:singh.kritank7@gmail.com"><span>Email</span>singh.kritank7@gmail.com</a>
+  <a href="https://www.linkedin.com/in/kritanksingh/"><span>LinkedIn</span>/in/kritanksingh</a>
+  <a href="https://github.com/kritank"><span>GitHub</span>@kritank</a>
+  <a href="resume.pdf"><span>Resume</span>Download PDF</a>
+</section>
+
+<footer class="wrap">
+  <p>Built by Kritank Singh. Open to senior data engineering and distributed systems roles where scale is a real constraint.</p>
+</footer>
+
+<script>
+(function(){
+  // Signature element: a skewed partition runtime profile that rebalances on load.
+  var SKEWED = [14,11,17,13,10,16,12,15,11,18,13,12,16,10,14,17,11,13,15,12,
+                16,11,14,18,12,15,10,13,17,11,14,12,16,13,10,15,11,17,12,14,
+                100,13,11,16,12,15,10,14];
+  var BALANCED = [46,52,48,55,44,51,49,53,47,50,54,45,52,48,51,46,53,49,44,50,
+                  55,47,52,45,49,54,48,51,46,50,53,44,47,52,49,55,45,51,48,50,
+                  58,46,53,47,52,44,49,54];
+  var host = document.getElementById('bars');
+  if(!host) return;
+
+  var frag = document.createDocumentFragment();
+  for(var i=0;i<SKEWED.length;i++){
+    var b = document.createElement('div');
+    b.className = 'bar' + (SKEWED[i] > 60 ? ' is-hot' : '');
+    b.style.setProperty('--hi', SKEWED[i] + '%');
+    b.style.setProperty('--lo', BALANCED[i] + '%');
+    b.style.transitionDelay = (i * 14) + 'ms';
+    frag.appendChild(b);
+  }
+  host.appendChild(frag);
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){ document.body.classList.remove('pre'); return; }
+  setTimeout(function(){ document.body.classList.remove('pre'); }, 900);
+})();
+</script>
+
+</body>
 </html>
